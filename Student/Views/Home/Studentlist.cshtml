@@ -1,0 +1,48 @@
+﻿@using System.Data;
+@model DataTable;
+@{
+    ViewData["Title"] = "Student List";
+}
+
+<h1>Student List</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Gender</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (DataRow row in Model.Rows)
+        {
+            <tr>
+                <td>@row["Studentid"]</td>
+                <td>@row["StudentName"]</td>
+                <td>@row["Mobile"]</td>
+                <td>@row["Email"]</td>
+                <td>@row["Gender"]</td>
+                <td>@row["Date"]</td>
+                <td>
+                    <a asp-action="Delete" asp-route-Studentid="@row["Studentid"]" asp-controller="Home">Delete</a>
+                </td>
+                <td>
+                    <form method="get" asp-action="Edit" asp-controller="Home">
+                        <input type="hidden" name="Studentid" value="@row["Studentid"]" />
+                        <input type="submit" value="Edit" class="btn btn-primary" />
+                    </form>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="StudentAdd" asp-controller="Home">Add New Student</a>
+</div>
